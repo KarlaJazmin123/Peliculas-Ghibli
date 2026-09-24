@@ -25,5 +25,6 @@ npm run dev
 
 No requiere API key ni variables de entorno: la API de Studio Ghibli es pública y de acceso libre.
 
-## URLs
+## https://peliculas-ghibli.vercel.app/
+## https://github.com/KarlaJazmin123/Peliculas-Ghibli.git
 
