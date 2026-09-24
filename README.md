@@ -1,12 +1,13 @@
-# Explorador de Países
+# Explorador de Películas Ghibli
 
-Aplicación web que consume la API de [RestCountries](https://restcountries.com/) para mostrar información de más de 250 países del mundo.
+Aplicación web que consume la [API de Studio Ghibli](https://ghibliapi.vercel.app/) para mostrar información de las películas del estudio.
 
 ## Funcionalidades
 
-- Consulta datos de países: bandera, capital, región y población.
-- Buscador de países por nombre.
-- Filtro por región (Américas, Europa, África, Asia, Oceanía).
+- Consulta datos de cada película: póster, sinopsis, director, año de lanzamiento, duración y calificación (Rotten Tomatoes).
+- Buscador de películas por título.
+- Filtro por director.
+- Vista de detalle al pasar el cursor sobre cada tarjeta (sinopsis y calificación).
 - Manejo de estados de carga y error.
 - Diseño responsivo.
 
@@ -14,22 +15,15 @@ Aplicación web que consume la API de [RestCountries](https://restcountries.com/
 
 - React + Vite
 - CSS
-- REST Countires API
 
-## Cómo correrlo localmente 
+## Cómo correrlo localmente
 
 \`\`\`bash
 npm install
 npm run dev
 \`\`\`
 
-Necesita crear un archivo `.env` con la clave de API de RestCountries:
+No requiere API key ni variables de entorno: la API de Studio Ghibli es pública y de acceso libre.
 
-\`\`\`
-VITE_API_KEY= clave 
-\`\`\`
-
-## URLS
-https://paises-steel.vercel.app/,
-https://github.com/KarlaJazmin123/Paises.git
+## URLs
 

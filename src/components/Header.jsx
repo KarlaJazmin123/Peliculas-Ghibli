@@ -1,36 +1,32 @@
-function Header({ busqueda, onBusquedaChange, region, onRegionChange }) {
-    return (
-        /*contenedor principal del encabezado. */
-        <header className="header">
-            <h1>Explorador de Países</h1>
-            <p>Descubre datos de países de todo el mundo</p>
+export function Header({ busqueda, setBusqueda, directorSeleccionado, setDirectorSeleccionado, peliculas }) {
+  const directoresUnicos = [...new Set(peliculas.map((pelicula) => pelicula.director))];
 
-            <div className="filtros">
-                <input
-                    type="text"
-                    placeholder="Buscar país por nombre..."
-                    value={busqueda} 
-                    onChange={(e) => onBusquedaChange(e.target.value)}
-                    className="buscador"
-                />
+  return (
+    <header className="header">
+      <h1>Películas de Studio Ghibli</h1>
 
-                
+      <div className="controles">
+        <input
+          type="text"
+          placeholder="Buscar por título..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="buscador"
+        />
 
-                <select
-                value={region} //Indica cuál es la región actualmente seleccionada.
-                onChange={(e) => onRegionChange(e.target.value)}
-                className="filtro-region"
-                >
-                <option value="">Todas las regiones</option>
-                <option value="Africa">África</option>
-                <option value="Americas">Américas</option>
-                <option value="Asia">Asia</option>
-                <option value="Europe">Europa</option>
-                <option value="Oceania">Oceanía</option>
-                </select>
-                </div>
-        </header>
-    );
+        <select
+          value={directorSeleccionado}
+          onChange={(e) => setDirectorSeleccionado(e.target.value)}
+          className="filtro-director"
+        >
+          <option value="">Todos los directores</option>
+          {directoresUnicos.map((director) => (
+            <option key={director} value={director}>
+              {director}
+            </option>
+          ))}
+        </select>
+      </div>
+    </header>
+  );
 }
-
-export default Header;

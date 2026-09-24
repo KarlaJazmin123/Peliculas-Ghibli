@@ -1,36 +1,43 @@
-import Header from './components/Header.jsx';
-import ListaPaises from './components/ListaPaises.jsx';
-import usePaises from './hooks/usePaises.js';
-import './App.css'
 import { useState } from 'react';
+import { usePeliculas } from './hooks/usePeliculas';
+import { Header } from './components/Header';
+import { ListaPeliculas } from './components/ListaPeliculas';
+import './App.css';
 
 function App() {
-  const { paises, cargando, error } = usePaises();
+  const { peliculas, cargando, error } = usePeliculas();
   const [busqueda, setBusqueda] = useState('');
-  const [region, setRegion] = useState('');
+  const [directorSeleccionado, setDirectorSeleccionado] = useState('');
 
-  const paisesFiltrados = paises.filter((pais) => {
-    const coincideNombre = pais.names?.common
-      ?.toLowerCase()
+  const peliculasFiltradas = peliculas.filter((pelicula) => {
+    const coincideTitulo = pelicula.title
+      .toLowerCase()
       .includes(busqueda.toLowerCase());
-    const coincideRegion = region === '' || pais.region === region;
-    return coincideNombre && coincideRegion;
+
+    const coincideDirector =
+      directorSeleccionado === '' || pelicula.director === directorSeleccionado;
+
+    return coincideTitulo && coincideDirector;
   });
+
+  if (cargando) {
+    return <p className="mensaje-estado">Cargando películas...</p>;
+  }
+
+  if (error) {
+    return <p className="mensaje-estado error">Error: {error}</p>;
+  }
 
   return (
     <div className="app">
       <Header
         busqueda={busqueda}
-        onBusquedaChange={setBusqueda}
-        region={region}
-        onRegionChange={setRegion}
+        setBusqueda={setBusqueda}
+        directorSeleccionado={directorSeleccionado}
+        setDirectorSeleccionado={setDirectorSeleccionado}
+        peliculas={peliculas}
       />
-
-      {cargando && <p className="mensaje">Cargando países...</p>}
-
-      {error && <p className="mensaje error">Ocurrió un error: {error}</p>}
-
-      {!cargando && !error && <ListaPaises paises={paisesFiltrados} />}
+      <ListaPeliculas peliculas={peliculasFiltradas} />
     </div>
   );
 }
